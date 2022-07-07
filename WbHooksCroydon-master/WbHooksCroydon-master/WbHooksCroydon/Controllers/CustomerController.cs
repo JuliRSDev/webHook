@@ -26,45 +26,37 @@ namespace WbHooksCroydon.Controllers
         }
 
         // POST: api/Customer
-        public string Post([FromBody] Customer customer)
+        public string Post([FromBody]Customer customer)
         {
             try
             {
-                if (customer != null)
+                if(customer != null)
                 {
                     db.Customer.Add(customer);
                     db.SaveChanges();
-                    return "add";
+                    return "Add";
                 }
-                else
-                {
-                    return "Not add, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Add, Not Found";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }
         }
 
         // PUT: api/Customer/5
-        public string Put(int id, [FromBody] Customer customer)
+        public string Put(int id, [FromBody]Customer customer)
         {
             try
             {
-                if (id != 0 && customer != null)
+                if(customer != null)
                 {
                     customer.id = id;
                     db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
                 }
-                else
-                {
-                    return "Not Update, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Update, Not Found";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }
@@ -76,18 +68,14 @@ namespace WbHooksCroydon.Controllers
             try
             {
                 var customer = db.Customer.Find(id);
-                if (customer != null)
+                if(customer != null)
                 {
                     db.Customer.Remove(customer);
                     db.SaveChanges();
                     return "Delete";
                 }
-                else
-                {
-                    return "Not Delete, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Delete, Not Found";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }

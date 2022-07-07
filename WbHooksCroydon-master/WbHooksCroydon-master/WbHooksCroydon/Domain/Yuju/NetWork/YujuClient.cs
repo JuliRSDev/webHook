@@ -45,9 +45,9 @@ namespace WbHooksCroydon.Domain.Yuju.NetWork
             response.Wait();
             return response.Result;
         }
-        public RespuestaYuju GetOrderAsync(string urlRequest)
+        public ResponseOrder GetOrder(string urlRequest)
         {
-            var response = _client.GetJsonAsync<RespuestaYuju>(urlRequest);
+            var response = _client.GetJsonAsync<ResponseOrder>(urlRequest);
             response.Wait();
             return response.Result;
         }

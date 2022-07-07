@@ -26,22 +26,18 @@ namespace WbHooksCroydon.Controllers
         }
 
         // POST: api/Shipping_Address
-        public string Post([FromBody] Shipping_Address shipping_Address)
+        public string Post([FromBody]Shipping_Address shipping_Address)
         {
             try
             {
-                if (shipping_Address != null)
+                if(shipping_Address != null)
                 {
                     db.Shipping_Address.Add(shipping_Address);
                     db.SaveChanges();
                     return "Add";
                 }
-                else
-                {
-                    return "Not Add, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Add, Not Found";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }
@@ -50,22 +46,17 @@ namespace WbHooksCroydon.Controllers
         // PUT: api/Shipping_Address/5
         public string Put(int id, [FromBody] Shipping_Address shipping_Address)
         {
-
             try
             {
-                if (shipping_Address != null)
+                if(shipping_Address != null)
                 {
                     shipping_Address.id = id;
                     db.Entry(shipping_Address).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
                 }
-                else
-                {
-                    return "Not Update, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not update";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }
@@ -76,19 +67,15 @@ namespace WbHooksCroydon.Controllers
         {
             try
             {
-                var shipping_Addrss = db.Shipping_Address.Find(id);
-                if (shipping_Addrss != null)
+                var shipping_Address = db.Shipping_Address.Find(id);
+                if(shipping_Address != null)
                 {
-                    db.Shipping_Address.Remove(shipping_Addrss);
+                    db.Shipping_Address.Remove(shipping_Address);
                     db.SaveChanges();
                     return "Delete";
                 }
-                else
-                {
-                    return "Not Delete, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Delete";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }

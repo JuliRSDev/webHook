@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WbHooksCroydon.Models.ViewModel
 {
-    public class RespuestaYuju
+    public class ResponseOrder
     {
 
         public class Accounts
@@ -148,9 +148,9 @@ namespace WbHooksCroydon.Models.ViewModel
             public string name { get; set; }
             public string status { get; set; }
             public string tracking_code { get; set; }
-            public double price { get; set; }
+            public double? price { get; set; }
             public object product_special_price { get; set; }
-            public double product_original_price { get; set; }
+            public double? product_original_price { get; set; }
             public string carrier { get; set; }
             public int quantity { get; set; }
             public object comments { get; set; }
@@ -163,7 +163,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public List<object> discounts { get; set; }
             public string channel_sku { get; set; }
             public string ff_type { get; set; }
-            public double marketplace_fee { get; set; }
+            public double? marketplace_fee { get; set; }
             public List<Shipment> shipments { get; set; }
             public bool is_combo { get; set; }
             public List<object> combo_components { get; set; }
@@ -242,7 +242,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public object custom_variation { get; set; }
             public object custom_variation_name { get; set; }
             public int stock { get; set; }
-            public double price { get; set; }
+            public double? price { get; set; }
             public string color_text { get; set; }
             public object discount { get; set; }
             public object discount_to { get; set; }
@@ -258,11 +258,11 @@ namespace WbHooksCroydon.Models.ViewModel
             public object part_number { get; set; }
             public string model { get; set; }
             public string brand { get; set; }
-            public double shipping_depth { get; set; }
-            public double shipping_height { get; set; }
-            public double shipping_width { get; set; }
+            public double? shipping_depth { get; set; }
+            public double? shipping_height { get; set; }
+            public double? shipping_width { get; set; }
             public string dimensions_unit { get; set; }
-            public double weight { get; set; }
+            public double? weight { get; set; }
             public string weight_unit { get; set; }
             public object measure_unit_code_sat { get; set; }
             public object product_code_sat { get; set; }
@@ -296,8 +296,8 @@ namespace WbHooksCroydon.Models.ViewModel
             public int marketplace_pk { get; set; }
             public int shop_pk { get; set; }
             public string reference { get; set; }
-            public double total { get; set; }
-            public double paid_total { get; set; }
+            public double? total { get; set; }
+            public double? paid_total { get; set; }
             public string currency { get; set; }
             public DateTime created_at { get; set; }
             public DateTime updated_at { get; set; }
@@ -311,10 +311,10 @@ namespace WbHooksCroydon.Models.ViewModel
             public List<Progress> progress { get; set; }
             public object billing_address { get; set; }
             public ShippingAddress shipping_address { get; set; }
-            public double shipping_cost { get; set; }
-            public double seller_shipping_cost { get; set; }
-            public double marketplace_fee { get; set; }
-            public double paid_total_to_seller { get; set; }
+            public double? shipping_cost { get; set; }
+            public double? seller_shipping_cost { get; set; }
+            public double? marketplace_fee { get; set; }
+            public double? paid_total_to_seller { get; set; }
             public DateTime payment_accredited_at { get; set; }
             public object fulfillment_type { get; set; }
             public List<string> payment_references { get; set; }

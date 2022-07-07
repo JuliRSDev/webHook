@@ -474,7 +474,7 @@
     <Compile Include="Models\DataBase\MarketPlaceHooksContext.cs" />
     <Compile Include="Models\DataBase\orders_hooks.cs" />
     <Compile Include="Models\SellerCenter\GetWebhookEntities.cs" />
-    <Compile Include="Models\ViewModel\RespuestaYuju.cs" />
+    <Compile Include="Models\ViewModel\ResponseOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebHooksRecivers\DafitiWebHookReciver.cs" />
     <Compile Include="WebHooksRecivers\LinioWebHookReciver.cs" />

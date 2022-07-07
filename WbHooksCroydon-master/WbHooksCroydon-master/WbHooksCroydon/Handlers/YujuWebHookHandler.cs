@@ -47,22 +47,36 @@ namespace WbHooksCroydon.Handlers
             MarketPlaceHooksContext db = new MarketPlaceHooksContext();
             var e = db.Database.CreateIfNotExists();
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
-            var res = YujuClient.Instance.GetOrderAsync(context.Data.ToString());
-            switch (res.marketplace_pk)
+            var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
+            switch (responseOrder.marketplace_pk)
             {
+                // Mercado Libre Colombia
                 case 15:
                     try
                     {
                         Guid guid = Guid.NewGuid();
-                        db.orders.Add(new orders_hooks() { market_place_id = res.marketplace_pk.ToString(), order_id = guid.ToString(), seller_id = guid.ToString() });
+                        db.orders.Add(new orders_hooks() { market_place_id = responseOrder.marketplace_pk.ToString(), 
+                            order_id = guid.ToString(), seller_id = guid.ToString() });
                         db.SaveChanges();
                     }catch(EntityException ex)
                     {
-                        var x = ex.Message.ToString();
-                        throw;
+                        ex.Message.ToString();
                     }
                     break;
+                // Linio Colombia
                 case 17:
+                    try
+                    {
+                        Guid guid = Guid.NewGuid();
+                        db.orders.Add(new orders_hooks() { market_place_id = responseOrder.marketplace_pk.ToString(), 
+                            order_id = guid.ToString(), seller_id = guid.ToString() });
+                        db.SaveChanges();
+                    }
+                    catch (EntityException ex)
+                    {
+                        ex.Message.ToString();
+                    }
+                    break;
                 default:
                     break;
             }

@@ -21,7 +21,7 @@ namespace WbHooksCroydon.Domain.Yuju.Models
         public string tracking_code { get; set; }
         public float price { get; set; }
         public float? product_special_price { get; set; }
-        public float product_original_price { get; set; }
+        public float? product_original_price { get; set; }
         public string carrier { get; set; }
         public int quantity { get; set; }
         public string comments { get; set; }
