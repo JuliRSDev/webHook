@@ -26,22 +26,18 @@ namespace WbHooksCroydon.Controllers
         }
 
         // POST: api/Progress
-        public string Post([FromBody] Progress progress)
+        public string Post([FromBody]Progress progress)
         {
             try
             {
-                if (progress != null)
+                if(progress != null)
                 {
                     db.Progress.Add(progress);
                     db.SaveChanges();
                     return "Add";
                 }
-                else
-                {
-                    return "Not Add, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Add, Not Found";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }
@@ -52,19 +48,15 @@ namespace WbHooksCroydon.Controllers
         {
             try
             {
+                progress.id = id;
                 if (progress != null)
                 {
-                    progress.id = id;
                     db.Entry(progress).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
                 }
-                else
-                {
-                    return "Not Update, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Update, Not Found";
+            } catch (EntityException e)
             {
                 return e.Message.ToString();
             }
@@ -76,18 +68,14 @@ namespace WbHooksCroydon.Controllers
             try
             {
                 var progress = db.Progress.Find(id);
-                if (progress != null)
+                if (progress  != null)
                 {
                     db.Progress.Remove(progress);
                     db.SaveChanges();
-                    return "Dalete";
+                    return "Delete";
                 }
-                else
-                {
-                    return "Not Dalete, Not Found";
-                }
-            }
-            catch (EntityException e)
+                return "Not Delete, Not Found";
+            }catch(EntityException e)
             {
                 return e.Message.ToString();
             }

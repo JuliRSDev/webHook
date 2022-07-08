@@ -48,26 +48,22 @@ namespace WbHooksCroydon.Handlers
             var e = db.Database.CreateIfNotExists();
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
             var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
+            Guid guid = Guid.NewGuid();
             switch (responseOrder.marketplace_pk)
             {
-                // Mercado Libre Colombia
+                // Mercado Libre Colombia || Mercado Shop Colombia
                 case 15:
-                    try
+                    string marketplace = "Libre";
+                    foreach (var tag in responseOrder.tags)
                     {
-                        Guid guid = Guid.NewGuid();
-                        db.orders.Add(new orders_hooks() { market_place_id = responseOrder.marketplace_pk.ToString(), 
-                            order_id = guid.ToString(), seller_id = guid.ToString() });
-                        db.SaveChanges();
-                    }catch(EntityException ex)
-                    {
-                        ex.Message.ToString();
+                        if (tag == "mshops") { marketplace = "Shop"; }
                     }
+                    Console.WriteLine(marketplace);
                     break;
                 // Linio Colombia
                 case 17:
                     try
                     {
-                        Guid guid = Guid.NewGuid();
                         db.orders.Add(new orders_hooks() { market_place_id = responseOrder.marketplace_pk.ToString(), 
                             order_id = guid.ToString(), seller_id = guid.ToString() });
                         db.SaveChanges();
@@ -79,6 +75,16 @@ namespace WbHooksCroydon.Handlers
                     break;
                 default:
                     break;
+            }
+            if (responseOrder.cart_orders.Count > 0)
+            {
+                // Tiene mas de una orden
+
+            }
+            else
+            {
+                // Solo tiene una orden
+
             }
             Logs.Intance.log.Info(logReg);
             return Task.FromResult(true);
