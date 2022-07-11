@@ -50,35 +50,35 @@ namespace WbHooksCroydon.Handlers
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
             var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
             string marketplace = "";
+            double? total = 0;
             /*  Guid guid = Guid.NewGuid();
              *  guid.ToString()
              *  orders ml = 
                 https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003841421322/
                 https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003820848138/
              */
-            if (responseOrder.marketplace_pk == 15 || responseOrder.marketplace_pk == 17)
+            if (responseOrder != null && responseOrder.marketplace_pk == 15)
             {
-               if (responseOrder.marketplace_pk == 15)
-               {
-                    marketplace = "Libre";
-                    foreach (var tag in responseOrder.tags)
-                    {
-                        if (tag == "mshops") { marketplace = "Shops"; }
-                    }
-               } else { marketplace = "Linio"; }
-            }
+                marketplace = "Libre";
+                foreach (var tag in responseOrder.tags)
+                {
+                    if (tag == "mshops") { marketplace = "Shops"; }
+                }
+            } else { marketplace = "Linio"; }
 
             if (marketplace != null)
             {
                 try
                 {
-                    db.Customer.Add(new Customer() { first_name = responseOrder.customer.first_name });
-                    db.SaveChanges();
-                }
-                catch (EntityException ex)
+                    //db.Customer.Add(new Customer() { first_name = responseOrder.customer.first_name });
+                    //db.SaveChanges();
+                } catch (EntityException ex) { ex.Message.ToString(); }
+
+                if(responseOrder.cart_orders.Count > 0)
                 {
-                    ex.Message.ToString();
-                }
+                    // more of a order
+                    foreach (var cart_order in responseOrder.cart_orders) {}
+                } else { total = responseOrder.total; }
             }
 
             Logs.Intance.log.Info(logReg);

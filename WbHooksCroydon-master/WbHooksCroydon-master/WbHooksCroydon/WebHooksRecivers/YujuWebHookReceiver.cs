@@ -51,7 +51,6 @@ namespace WbHooksCroydon.WebHooksRecivers
                 }
             }
 
-
             string data = headerYuju.Where(a => a.Key == "location").FirstOrDefault().Value;
             string action = "test";
             return await ExecuteWebHookAsync(id, context, request, new[] { action }, data);
