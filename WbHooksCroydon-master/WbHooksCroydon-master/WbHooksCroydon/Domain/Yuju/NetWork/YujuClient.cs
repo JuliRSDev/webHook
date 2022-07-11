@@ -42,7 +42,6 @@ namespace WbHooksCroydon.Domain.Yuju.NetWork
         public OrderDetail GetOrderDetail(string urlRequest)
         {
             var response = _client.GetJsonAsync<OrderDetail>(urlRequest);
-            // {"Request failed with status code Unauthorized"}
             response.Wait();
             return response.Result;
         }

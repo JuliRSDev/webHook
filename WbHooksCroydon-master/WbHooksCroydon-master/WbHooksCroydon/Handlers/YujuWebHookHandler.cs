@@ -49,14 +49,8 @@ namespace WbHooksCroydon.Handlers
             var e = db.Database.CreateIfNotExists();
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
             var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
+
             string marketplace = "";
-            double? total = 0;
-            /*  Guid guid = Guid.NewGuid();
-             *  guid.ToString()
-             *  orders ml = 
-                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003841421322/
-                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003820848138/
-             */
             if (responseOrder != null && responseOrder.marketplace_pk == 15)
             {
                 marketplace = "Libre";
@@ -66,6 +60,7 @@ namespace WbHooksCroydon.Handlers
                 }
             } else { marketplace = "Linio"; }
 
+            double? total = 0;
             if (marketplace != null)
             {
                 try
@@ -83,6 +78,12 @@ namespace WbHooksCroydon.Handlers
 
             Logs.Intance.log.Info(logReg);
             return Task.FromResult(true);
+
+            /*  Guid guid = Guid.NewGuid(); guid.ToString()
+             *  orders ml = 
+                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003841421322/
+                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003820848138/
+             */
         }
     }
 }
