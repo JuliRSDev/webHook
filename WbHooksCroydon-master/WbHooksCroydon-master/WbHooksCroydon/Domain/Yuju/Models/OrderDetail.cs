@@ -16,11 +16,11 @@ namespace WbHooksCroydon.Domain.Yuju.Models
         public int marketplace_pk { get; set; }
         public int shop_pk { get; set; }
         public string reference { get; set; }
-        public float total { get; set; }
-        public float paid_total { get; set; }
+        public float? total { get; set; }
+        public float? paid_total { get; set; }
         public string currency { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public DateTime? created_at { get; set; }
+        public DateTime? updated_at { get; set; }
         public string payment_method { get; set; }
         public string delivery_deadline { get; set; }
         public string status { get; set; }
@@ -31,11 +31,11 @@ namespace WbHooksCroydon.Domain.Yuju.Models
         public Progress[] progress { get; set; }
         public Billing_Address billing_address { get; set; }
         public Shipping_Address shipping_address { get; set; }
-        public float shipping_cost { get; set; }
+        public float? shipping_cost { get; set; }
         public object seller_shipping_cost { get; set; }
         public object marketplace_fee { get; set; }
         public object paid_total_to_seller { get; set; }
-        public DateTime payment_accredited_at { get; set; }
+        public DateTime? payment_accredited_at { get; set; }
         public object fulfillment_type { get; set; }
         public object[] payment_references { get; set; }
         public object[] cart_orders { get; set; }

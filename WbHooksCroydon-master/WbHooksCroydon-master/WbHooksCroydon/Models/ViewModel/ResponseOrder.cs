@@ -41,8 +41,8 @@ namespace WbHooksCroydon.Models.ViewModel
         {
             public Accounts accounts { get; set; }
             public object reserve_id { get; set; }
-            public DateTime date_created { get; set; }
-            public DateTime last_updated { get; set; }
+            public DateTime? date_created { get; set; }
+            public DateTime? last_updated { get; set; }
             public Amounts amounts { get; set; }
             public string id { get; set; }
             public string name { get; set; }
@@ -66,7 +66,7 @@ namespace WbHooksCroydon.Models.ViewModel
 
         public class Extra
         {
-            public DateTime date_approved { get; set; }
+            public DateTime? date_approved { get; set; }
             public bool binary_mode { get; set; }
             public int installments { get; set; }
             public string operation_type { get; set; }
@@ -89,7 +89,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public string processing_mode { get; set; }
             public string status_detail { get; set; }
             public long id { get; set; }
-            public DateTime money_release_date { get; set; }
+            public DateTime? money_release_date { get; set; }
             public object store_id { get; set; }
             public object sponsor_id { get; set; }
             public int shipping_amount { get; set; }
@@ -117,10 +117,10 @@ namespace WbHooksCroydon.Models.ViewModel
             public bool live_mode { get; set; }
             public List<ChargesDetail> charges_details { get; set; }
             public object merchant_account_id { get; set; }
-            public DateTime date_created { get; set; }
+            public DateTime? date_created { get; set; }
             public TransactionDetails transaction_details { get; set; }
             public int taxes_amount { get; set; }
-            public DateTime date_last_updated { get; set; }
+            public DateTime? date_last_updated { get; set; }
             public object call_for_authorize_id { get; set; }
             public object marketplace_owner { get; set; }
             public string pack_id { get; set; }
@@ -211,7 +211,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public string amount { get; set; }
             public string currency { get; set; }
             public string id { get; set; }
-            public DateTime acredited_at { get; set; }
+            public DateTime? acredited_at { get; set; }
             public Extra extra { get; set; }
         }
 
@@ -299,8 +299,8 @@ namespace WbHooksCroydon.Models.ViewModel
             public double? total { get; set; }
             public double? paid_total { get; set; }
             public string currency { get; set; }
-            public DateTime created_at { get; set; }
-            public DateTime updated_at { get; set; }
+            public DateTime? created_at { get; set; }
+            public DateTime? updated_at { get; set; }
             public string payment_method { get; set; }
             public string delivery_deadline { get; set; }
             public string status { get; set; }
@@ -365,13 +365,13 @@ namespace WbHooksCroydon.Models.ViewModel
             public object date_not_delivered { get; set; }
             public object date_returned { get; set; }
             public object date_created { get; set; }
-            public DateTime date_delivered { get; set; }
-            public DateTime date_handling { get; set; }
+            public DateTime? date_delivered { get; set; }
+            public DateTime? date_handling { get; set; }
             public object date_first_printed { get; set; }
-            public DateTime date_first_visit { get; set; }
+            public DateTime? date_first_visit { get; set; }
             public object date_delivered_estimated { get; set; }
-            public DateTime date_ready_to_ship { get; set; }
-            public DateTime date_shipped { get; set; }
+            public DateTime? date_ready_to_ship { get; set; }
+            public DateTime? date_shipped { get; set; }
             public object date_cancelled { get; set; }
         }
 

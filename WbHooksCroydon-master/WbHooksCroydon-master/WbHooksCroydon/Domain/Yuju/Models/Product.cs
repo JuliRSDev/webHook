@@ -22,7 +22,7 @@ namespace WbHooksCroydon.Domain.Yuju.Models
         public object custom_variation { get; set; }
         public object custom_variation_name { get; set; }
         public int stock { get; set; }
-        public float price { get; set; }
+        public float? price { get; set; }
         public string color_text { get; set; }
         public object discount { get; set; }
         public object discount_to { get; set; }
@@ -38,11 +38,11 @@ namespace WbHooksCroydon.Domain.Yuju.Models
         public object part_number { get; set; }
         public string model { get; set; }
         public string brand { get; set; }
-        public float shipping_depth { get; set; }
-        public float shipping_height { get; set; }
-        public float shipping_width { get; set; }
+        public float? shipping_depth { get; set; }
+        public float? shipping_height { get; set; }
+        public float? shipping_width { get; set; }
         public string dimensions_unit { get; set; }
-        public float weight { get; set; }
+        public float? weight { get; set; }
         public string weight_unit { get; set; }
         public object measure_unit_code_sat { get; set; }
         public object product_code_sat { get; set; }

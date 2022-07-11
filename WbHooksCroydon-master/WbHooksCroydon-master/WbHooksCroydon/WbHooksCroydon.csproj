@@ -470,6 +470,10 @@
     <Compile Include="Migrations\202207060314002_ProgressEntityMigration.Designer.cs">
       <DependentUpon>202207060314002_ProgressEntityMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207111502299_optinalVar.cs" />
+    <Compile Include="Migrations\202207111502299_optinalVar.Designer.cs">
+      <DependentUpon>202207111502299_optinalVar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataBase\MarketPlaceHooksContext.cs" />
     <Compile Include="Models\DataBase\orders_hooks.cs" />
@@ -577,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207060314002_ProgressEntityMigration.resx">
       <DependentUpon>202207060314002_ProgressEntityMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207111502299_optinalVar.resx">
+      <DependentUpon>202207111502299_optinalVar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

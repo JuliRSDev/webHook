@@ -5,6 +5,7 @@ using System.Data.Entity.Core;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using WbHooksCroydon.Domain.Yuju.Models;
 using WbHooksCroydon.Domain.Yuju.NetWork;
 using WbHooksCroydon.Log4Net;
 using WbHooksCroydon.Models.DataBase;
@@ -48,53 +49,38 @@ namespace WbHooksCroydon.Handlers
             var e = db.Database.CreateIfNotExists();
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
             var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
-            Guid guid = Guid.NewGuid();
-            /*
-             * https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003841425110/
-             * "cart_orders": [
-                "2000003841421322",
-                "2000003841421320",
-                "2000003841425110",
-                "2000003841417650"
-                ],
+            string marketplace = "";
+            /*  Guid guid = Guid.NewGuid();
+             *  guid.ToString()
+             *  orders ml = 
+                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003841421322/
+                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003820848138/
              */
-            switch (responseOrder.marketplace_pk)
+            if (responseOrder.marketplace_pk == 15 || responseOrder.marketplace_pk == 17)
             {
-                // Mercado Libre Colombia || Mercado Shop Colombia
-                case 15:
-                    string marketplace = "Libre";
+               if (responseOrder.marketplace_pk == 15)
+               {
+                    marketplace = "Libre";
                     foreach (var tag in responseOrder.tags)
                     {
-                        if (tag == "mshops") { marketplace = "Shop"; }
+                        if (tag == "mshops") { marketplace = "Shops"; }
                     }
-                    Console.WriteLine(marketplace);
-                    break;
-                // Linio Colombia
-                case 17:
-                    try
-                    {
-                        db.orders.Add(new orders_hooks() { market_place_id = responseOrder.marketplace_pk.ToString(), 
-                            order_id = guid.ToString(), seller_id = guid.ToString() });
-                        db.SaveChanges();
-                    }
-                    catch (EntityException ex)
-                    {
-                        ex.Message.ToString();
-                    }
-                    break;
-                default:
-                    break;
+               } else { marketplace = "Linio"; }
             }
-            if (responseOrder.cart_orders.Count > 0)
-            {
-                // Tiene mas de una orden
 
-            }
-            else
+            if (marketplace != null)
             {
-                // Solo tiene una orden
-
+                try
+                {
+                    db.Customer.Add(new Customer() { first_name = responseOrder.customer.first_name });
+                    db.SaveChanges();
+                }
+                catch (EntityException ex)
+                {
+                    ex.Message.ToString();
+                }
             }
+
             Logs.Intance.log.Info(logReg);
             return Task.FromResult(true);
         }
