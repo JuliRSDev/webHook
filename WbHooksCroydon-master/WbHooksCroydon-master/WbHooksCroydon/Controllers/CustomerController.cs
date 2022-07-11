@@ -35,8 +35,7 @@ namespace WbHooksCroydon.Controllers
                     db.Customer.Add(customer);
                     db.SaveChanges();
                     return "Add";
-                }
-                return "Not Add, Not Found";
+                } else { return "Not Add, Error"; }
             }catch(EntityException e)
             {
                 return e.Message.ToString();
@@ -48,14 +47,14 @@ namespace WbHooksCroydon.Controllers
         {
             try
             {
-                if(customer != null)
+                var id_customer = db.Customer.Find(id);
+                if (id_customer != null && customer != null)
                 {
                     customer.id = id;
                     db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
-                }
-                return "Not Update, Not Found";
+                } else { return "Not Found"; }
             }catch(EntityException e)
             {
                 return e.Message.ToString();
@@ -73,8 +72,7 @@ namespace WbHooksCroydon.Controllers
                     db.Customer.Remove(customer);
                     db.SaveChanges();
                     return "Delete";
-                }
-                return "Not Delete, Not Found";
+                } else { return "Not Found"; }
             }catch(EntityException e)
             {
                 return e.Message.ToString();

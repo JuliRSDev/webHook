@@ -35,11 +35,7 @@ namespace WbHooksCroydon.Controllers
                     db.Billing_Address.Add(billing_Address);
                     db.SaveChanges();
                     return "Add";
-                }
-                else
-                {
-                    return "Fail Add, Not Found";
-                }
+                } else { return "Not Add, Error"; }
             }
             catch (EntityException e)
             {
@@ -50,20 +46,17 @@ namespace WbHooksCroydon.Controllers
         // PUT: api/Billing_Address/5
         public string Put(int id, [FromBody] Billing_Address billing_Address)
         {
+
             try
             {
-                if (billing_Address != null)
+                var id_billing_Address = db.Billing_Address.Find(id);
+                if (id_billing_Address != null && billing_Address != null)
                 {
                     billing_Address.id = id;
                     db.Entry(billing_Address).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
-                }
-                else
-                {
-                    return "Fail Update, Not Found";
-
-                }
+                } else { return "Not Found"; }
             }
             catch (EntityException e)
             {
@@ -82,11 +75,7 @@ namespace WbHooksCroydon.Controllers
                     db.Billing_Address.Remove(billing_Address);
                     db.SaveChanges();
                     return "Delete";
-                }
-                else
-                {
-                    return "Fail delete, Not Found";
-                }
+                } else { return "Not Found"; }
             }
             catch (EntityException e)
             {

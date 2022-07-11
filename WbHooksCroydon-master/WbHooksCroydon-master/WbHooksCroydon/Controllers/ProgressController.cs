@@ -35,8 +35,7 @@ namespace WbHooksCroydon.Controllers
                     db.Progress.Add(progress);
                     db.SaveChanges();
                     return "Add";
-                }
-                return "Not Add, Not Found";
+                } else { return "Not Add, Error"; }
             }catch(EntityException e)
             {
                 return e.Message.ToString();
@@ -48,14 +47,14 @@ namespace WbHooksCroydon.Controllers
         {
             try
             {
-                progress.id = id;
-                if (progress != null)
+                var id_progress = db.Progress.Find(id);
+                if (id_progress != null && progress != null)
                 {
+                    progress.id = id;
                     db.Entry(progress).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
-                }
-                return "Not Update, Not Found";
+                } else { return "Not Found"; }
             } catch (EntityException e)
             {
                 return e.Message.ToString();
@@ -73,8 +72,7 @@ namespace WbHooksCroydon.Controllers
                     db.Progress.Remove(progress);
                     db.SaveChanges();
                     return "Delete";
-                }
-                return "Not Delete, Not Found";
+                } else { return "Not Found"; }
             }catch(EntityException e)
             {
                 return e.Message.ToString();

@@ -35,11 +35,7 @@ namespace WbHooksCroydon.Controllers
                     db.Product.Add(product);
                     db.SaveChanges();
                     return "Add";
-                }
-                else
-                {
-                    return "Not Add, Not Found";
-                }
+                } else { return "Not Add, Error"; }
             }
             catch (EntityException e)
             {
@@ -52,17 +48,14 @@ namespace WbHooksCroydon.Controllers
         {
             try
             {
-                if (product != null)
+                var id_product = db.Product.Find(id);
+                if (id_product != null && product != null)
                 {
                     product.id = id;
                     db.Entry(product).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
-                }
-                else
-                {
-                    return "Not Update, Not Found";
-                }
+                } else { return "Not Found"; }
             }
             catch (EntityException e)
             {
@@ -81,11 +74,7 @@ namespace WbHooksCroydon.Controllers
                     db.Product.Remove(product);
                     db.SaveChanges();
                     return "Delete";
-                }
-                else
-                {
-                    return "Not Delete, Not Found";
-                }
+                } else { return "Not Found"; }
             }
             catch (EntityException e)
             {

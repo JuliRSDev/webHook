@@ -36,7 +36,7 @@ namespace WbHooksCroydon.Controllers
                     db.SaveChanges();
                     return "Add";
                 }
-                return "Not Add, Not Found";
+                return "Not Add, Error";
             }catch(EntityException e)
             {
                 return e.Message.ToString();
@@ -48,14 +48,14 @@ namespace WbHooksCroydon.Controllers
         {
             try
             {
-                if(shipping_Address != null)
+                var id_shipping_Address = db.Shipping_Address.Find(id);
+                if (id_shipping_Address != null && shipping_Address != null)
                 {
                     shipping_Address.id = id;
                     db.Entry(shipping_Address).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
-                }
-                return "Not update";
+                } else { return "Not Found"; }
             }catch(EntityException e)
             {
                 return e.Message.ToString();
@@ -73,8 +73,7 @@ namespace WbHooksCroydon.Controllers
                     db.Shipping_Address.Remove(shipping_Address);
                     db.SaveChanges();
                     return "Delete";
-                }
-                return "Not Delete";
+                } else { return "Not Found"; }
             }catch(EntityException e)
             {
                 return e.Message.ToString();
