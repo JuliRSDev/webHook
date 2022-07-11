@@ -49,6 +49,15 @@ namespace WbHooksCroydon.Handlers
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
             var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
             Guid guid = Guid.NewGuid();
+            /*
+             * https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003841425110/
+             * "cart_orders": [
+                "2000003841421322",
+                "2000003841421320",
+                "2000003841425110",
+                "2000003841417650"
+                ],
+             */
             switch (responseOrder.marketplace_pk)
             {
                 // Mercado Libre Colombia || Mercado Shop Colombia
