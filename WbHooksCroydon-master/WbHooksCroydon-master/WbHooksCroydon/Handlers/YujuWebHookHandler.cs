@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNet.WebHooks;
+﻿using Microsoft.AspNet.WebHooks;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,6 @@ using System.Data.Entity.Core;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using WbHooksCroydon.Domain.Yuju.Models;
 using WbHooksCroydon.Domain.Yuju.NetWork;
 using WbHooksCroydon.Log4Net;
@@ -45,18 +43,20 @@ namespace WbHooksCroydon.Handlers
                     headerYuju.Add(header.Key, header.Value.FirstOrDefault());
                 }
             }
+
             string logReg = "";
             foreach (var header in headerYuju)
             {
                 logReg += string.Format("\n\r{0} == {1}\n\r", header.Key, header.Value);
             }
+
             MarketPlaceHooksContext db = new MarketPlaceHooksContext();
             var e = db.Database.CreateIfNotExists();
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
             var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
 
             string marketplace = "";
-            if (responseOrder != null && responseOrder.marketplace_pk == 15)
+            if (responseOrder.marketplace_pk == 15)
             {
                 marketplace = "Libre";
                 foreach (var tag in responseOrder.tags)
@@ -70,50 +70,30 @@ namespace WbHooksCroydon.Handlers
             {
                 try
                 {
-                    db.Customer.Add(new Customer() {
-                        first_name = responseOrder.customer.first_name,
-                        last_name = responseOrder.customer.last_name,
-                        email = responseOrder.customer.email,
-                        phone = responseOrder.customer.phone,
-                        doc_number = responseOrder.customer.doc_number
-                    });
-                    db.SaveChanges();
+                    //db.Customer.Add(new Customer() {
+                    //    first_name = responseOrder.customer.first_name, last_name = responseOrder.customer.last_name,
+                    //    email = responseOrder.customer.email, phone = responseOrder.customer.phone,
+                    //    doc_number = responseOrder.customer.doc_number
+                    //});
+                    //db.SaveChanges();
                 } catch (EntityException ex) { ex.Message.ToString(); }
 
-                if(responseOrder.cart_orders.Count > 0)
+                if (responseOrder.cart_orders.Count > 0)
                 {
-                    // mas ordenes
                     foreach (var cart_order in responseOrder.cart_orders)
                     {
-
-                        try
-                        {
-                            var rest = get(urlService + responseOrder.marketplace_pk + "/orders/" + cart_order.ToString());
-                            var x = rest.Result;
-                        }
-                        catch (Exception ex)
-                        {
-                            string mensaje =  ex.Message.ToString();
-                            throw;
-                        }
-
-                        //var responseOrder1 = YujuClient.Instance.GetOrder(
-                        //    urlService + responseOrder.marketplace_pk + "/orders/" + cart_order.ToString());
-                        //total += x.total;
+                        var responseOrders = YujuClient.Instance.GetOrder(
+                           urlService + responseOrder.marketplace_pk.ToString() + 
+                           "/orders/" + cart_order.ToString() + "/"
+                        );
+                        total += responseOrders.total;
                     }
                 } else { total = responseOrder.total; }
+
             }
 
             Logs.Intance.log.Info(logReg);
             return Task.FromResult(true);
-        }
-        private async Task<ResponseOrder> get(string url) {
-
-            var consulta = new HttpClient();          
-            consulta.DefaultRequestHeaders.Add("Authorization", "Token 3fe510b1ecec4283d719a027132b88ebf55130f9");
-            var resultado = await consulta.GetAsync(url);
-            var responseBody = await resultado.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<ResponseOrder>(responseBody);
         }
     }
 }
