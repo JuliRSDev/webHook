@@ -1,20 +1,25 @@
-﻿using Microsoft.AspNet.WebHooks;
+﻿using AutoMapper;
+using Microsoft.AspNet.WebHooks;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using WbHooksCroydon.Domain.Yuju.Models;
 using WbHooksCroydon.Domain.Yuju.NetWork;
 using WbHooksCroydon.Log4Net;
 using WbHooksCroydon.Models.DataBase;
+using WbHooksCroydon.Models.ViewModel;
 using WbHooksCroydon.WebHooksRecivers;
 
 namespace WbHooksCroydon.Handlers
 {
     public class YujuWebHookHandler : WebHookHandler
     {
+        string urlService = "https://api.software.madkting.com/shops/1086553/marketplace/";
         public YujuWebHookHandler()
         {
             this.Receiver = YujuWebHookReceiver.HookName;
@@ -65,25 +70,50 @@ namespace WbHooksCroydon.Handlers
             {
                 try
                 {
-                    //db.Customer.Add(new Customer() { first_name = responseOrder.customer.first_name });
-                    //db.SaveChanges();
+                    db.Customer.Add(new Customer() {
+                        first_name = responseOrder.customer.first_name,
+                        last_name = responseOrder.customer.last_name,
+                        email = responseOrder.customer.email,
+                        phone = responseOrder.customer.phone,
+                        doc_number = responseOrder.customer.doc_number
+                    });
+                    db.SaveChanges();
                 } catch (EntityException ex) { ex.Message.ToString(); }
 
                 if(responseOrder.cart_orders.Count > 0)
                 {
-                    // more of a order
-                    foreach (var cart_order in responseOrder.cart_orders) {}
+                    // mas ordenes
+                    foreach (var cart_order in responseOrder.cart_orders)
+                    {
+
+                        try
+                        {
+                            var rest = get(urlService + responseOrder.marketplace_pk + "/orders/" + cart_order.ToString());
+                            var x = rest.Result;
+                        }
+                        catch (Exception ex)
+                        {
+                            string mensaje =  ex.Message.ToString();
+                            throw;
+                        }
+
+                        //var responseOrder1 = YujuClient.Instance.GetOrder(
+                        //    urlService + responseOrder.marketplace_pk + "/orders/" + cart_order.ToString());
+                        //total += x.total;
+                    }
                 } else { total = responseOrder.total; }
             }
 
             Logs.Intance.log.Info(logReg);
             return Task.FromResult(true);
+        }
+        private async Task<ResponseOrder> get(string url) {
 
-            /*  Guid guid = Guid.NewGuid(); guid.ToString()
-             *  orders ml = 
-                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003841421322/
-                https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003820848138/
-             */
+            var consulta = new HttpClient();          
+            consulta.DefaultRequestHeaders.Add("Authorization", "Token 3fe510b1ecec4283d719a027132b88ebf55130f9");
+            var resultado = await consulta.GetAsync(url);
+            var responseBody = await resultado.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<ResponseOrder>(responseBody);
         }
     }
 }

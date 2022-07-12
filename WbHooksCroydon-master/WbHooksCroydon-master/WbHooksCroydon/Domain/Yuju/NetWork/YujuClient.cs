@@ -15,7 +15,7 @@ namespace WbHooksCroydon.Domain.Yuju.NetWork
     public class YujuClient : IYujuClient, IDisposable
     {
         private static YujuClient instance = null;
-
+        private static string token = "Token 3fe510b1ecec4283d719a027132b88ebf55130f9";
         public static YujuClient Instance
         {
             get
