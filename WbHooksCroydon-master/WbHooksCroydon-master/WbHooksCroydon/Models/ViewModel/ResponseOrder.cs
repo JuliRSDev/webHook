@@ -8,6 +8,7 @@ namespace WbHooksCroydon.Models.ViewModel
     public class ResponseOrder
     {
 
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public class Accounts
         {
             public string to { get; set; }
@@ -23,7 +24,7 @@ namespace WbHooksCroydon.Models.ViewModel
 
         public class Amounts
         {
-            public double original { get; set; }
+            public double? original { get; set; }
             public int refunded { get; set; }
         }
 
@@ -47,7 +48,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public string id { get; set; }
             public string name { get; set; }
             public List<object> refund_charges { get; set; }
-            public long client_id { get; set; }
+            public long? client_id { get; set; }
             public string type { get; set; }
             public Metadata metadata { get; set; }
         }
@@ -67,63 +68,69 @@ namespace WbHooksCroydon.Models.ViewModel
         public class Extra
         {
             public DateTime? date_approved { get; set; }
-            public bool binary_mode { get; set; }
+            public bool? binary_mode { get; set; }
+            public DateTime? date_last_updated { get; set; }
             public int installments { get; set; }
             public string operation_type { get; set; }
+            public int collector_id { get; set; }
             public string payment_method_id { get; set; }
-            public List<object> refunds { get; set; }
+            public object pos_id { get; set; }
             public object money_release_schema { get; set; }
             public object differential_pricing_id { get; set; }
-            public string payment_type_id { get; set; }
+            public string build_version { get; set; }
             public object corporation_id { get; set; }
             public int coupon_amount { get; set; }
-            public int collector_id { get; set; }
+            public List<Taxis> taxes { get; set; }
             public Payer payer { get; set; }
             public object authorization_code { get; set; }
             public object issuer_id { get; set; }
-            public object net_amount { get; set; }
             public object platform_id { get; set; }
             public object notification_url { get; set; }
-            public object integrator_id { get; set; }
+            public object net_amount { get; set; }
             public object merchant_number { get; set; }
             public string processing_mode { get; set; }
             public string status_detail { get; set; }
-            public long id { get; set; }
+            public long? id { get; set; }
             public DateTime? money_release_date { get; set; }
             public object store_id { get; set; }
             public object sponsor_id { get; set; }
-            public int shipping_amount { get; set; }
             public object deduction_schema { get; set; }
+            public object money_release_status { get; set; }
             public List<object> acquirer_reconciliation { get; set; }
             public object brand_id { get; set; }
-            public object statement_descriptor { get; set; }
+            public int taxes_amount { get; set; }
             public string external_reference { get; set; }
-            public PointOfInteraction point_of_interaction { get; set; }
-            public bool captured { get; set; }
+            public object merchant_account_id { get; set; }
+            public object integrator_id { get; set; }
+            public bool? captured { get; set; }
             public object counter_currency { get; set; }
-            public List<Taxis> taxes { get; set; }
+            public int shipping_amount { get; set; }
             public Order order { get; set; }
             public AdditionalInfo additional_info { get; set; }
             public string status { get; set; }
             public Metadata metadata { get; set; }
             public string currency_id { get; set; }
-            public object pos_id { get; set; }
+            public List<object> refunds { get; set; }
             public int transaction_amount_refunded { get; set; }
             public int transaction_amount { get; set; }
             public object date_of_expiration { get; set; }
             public string description { get; set; }
             public List<FeeDetail> fee_details { get; set; }
             public Card card { get; set; }
-            public bool live_mode { get; set; }
+            public bool? live_mode { get; set; }
             public List<ChargesDetail> charges_details { get; set; }
-            public object merchant_account_id { get; set; }
+            public string payment_type_id { get; set; }
             public DateTime? date_created { get; set; }
             public TransactionDetails transaction_details { get; set; }
-            public int taxes_amount { get; set; }
-            public DateTime? date_last_updated { get; set; }
+            public object statement_descriptor { get; set; }
+            public PointOfInteraction point_of_interaction { get; set; }
             public object call_for_authorize_id { get; set; }
             public object marketplace_owner { get; set; }
+            public int cart_seller_shipping_cost { get; set; }
+            public double? cart_total { get; set; }
+            public int cart_marketplace_fee { get; set; }
             public string pack_id { get; set; }
+            public int cart_shipping_cost { get; set; }
         }
 
         public class FeeDetail
@@ -165,7 +172,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public string ff_type { get; set; }
             public double? marketplace_fee { get; set; }
             public List<Shipment> shipments { get; set; }
-            public bool is_combo { get; set; }
+            public bool? is_combo { get; set; }
             public List<object> combo_components { get; set; }
             public object extra { get; set; }
         }
@@ -292,40 +299,40 @@ namespace WbHooksCroydon.Models.ViewModel
             public string status { get; set; }
         }
 
-            public string pk { get; set; }
-            public int marketplace_pk { get; set; }
-            public int shop_pk { get; set; }
-            public string reference { get; set; }
-            public double? total { get; set; }
-            public double? paid_total { get; set; }
-            public string currency { get; set; }
-            public DateTime? created_at { get; set; }
-            public DateTime? updated_at { get; set; }
-            public string payment_method { get; set; }
-            public string delivery_deadline { get; set; }
-            public string status { get; set; }
-            public List<string> actions { get; set; }
-            public bool notes { get; set; }
-            public object coupon { get; set; }
-            public Customer customer { get; set; }
-            public List<Progress> progress { get; set; }
-            public object billing_address { get; set; }
-            public ShippingAddress shipping_address { get; set; }
-            public double? shipping_cost { get; set; }
-            public double? seller_shipping_cost { get; set; }
-            public double? marketplace_fee { get; set; }
-            public double? paid_total_to_seller { get; set; }
-            public DateTime payment_accredited_at { get; set; }
-            public object fulfillment_type { get; set; }
-            public List<string> payment_references { get; set; }
-            public List<object> cart_orders { get; set; }
-            public List<string> tags { get; set; }
-            public List<PaymentDetail> payment_detail { get; set; }
-            public Extra extra { get; set; }
-            public object claims { get; set; }
-            public List<object> discounts { get; set; }
-            public string ff_type { get; set; }
-            public List<Item> items { get; set; }
+        public string pk { get; set; }
+        public int marketplace_pk { get; set; }
+        public int shop_pk { get; set; }
+        public string reference { get; set; }
+        public double? total { get; set; }
+        public double? paid_total { get; set; }
+        public string currency { get; set; }
+        public DateTime? created_at { get; set; }
+        public DateTime? updated_at { get; set; }
+        public string payment_method { get; set; }
+        public string delivery_deadline { get; set; }
+        public string status { get; set; }
+        public List<string> actions { get; set; }
+        public bool? notes { get; set; }
+        public object coupon { get; set; }
+        public Customer customer { get; set; }
+        public List<Progress> progress { get; set; }
+        public object billing_address { get; set; }
+        public ShippingAddress shipping_address { get; set; }
+        public double? shipping_cost { get; set; }
+        public double? seller_shipping_cost { get; set; }
+        public double? marketplace_fee { get; set; }
+        public double? paid_total_to_seller { get; set; }
+        public DateTime? payment_accredited_at { get; set; }
+        public object fulfillment_type { get; set; }
+        public List<string> payment_references { get; set; }
+        public List<string> cart_orders { get; set; }
+        public List<string> tags { get; set; }
+        public List<PaymentDetail> payment_detail { get; set; }
+        public Extra extra { get; set; }
+        public object claims { get; set; }
+        public List<object> discounts { get; set; }
+        public string ff_type { get; set; }
+        public List<Item> items { get; set; }
 
         public class Shipment
         {
@@ -366,9 +373,9 @@ namespace WbHooksCroydon.Models.ViewModel
             public object date_returned { get; set; }
             public object date_created { get; set; }
             public DateTime? date_delivered { get; set; }
-            public DateTime? date_handling { get; set; }
-            public object date_first_printed { get; set; }
             public DateTime? date_first_visit { get; set; }
+            public object date_first_printed { get; set; }
+            public DateTime? date_handling { get; set; }
             public object date_delivered_estimated { get; set; }
             public DateTime? date_ready_to_ship { get; set; }
             public DateTime? date_shipped { get; set; }
@@ -385,15 +392,14 @@ namespace WbHooksCroydon.Models.ViewModel
         {
             public object payable_deferral_period { get; set; }
             public object payment_method_reference_id { get; set; }
-            public int total_paid_amount { get; set; }
-            public double net_received_amount { get; set; }
-            public object external_resource_url { get; set; }
             public int installment_amount { get; set; }
+            public double? net_received_amount { get; set; }
+            public int total_paid_amount { get; set; }
+            public object external_resource_url { get; set; }
             public object acquirer_reference { get; set; }
             public int overpaid_amount { get; set; }
             public object financial_institution { get; set; }
         }
-
 
     }
 }

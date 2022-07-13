@@ -26,17 +26,18 @@ namespace WbHooksCroydon.Controllers
         }
 
         // POST: api/Customer
-        public string Post([FromBody]Customer customer)
+        public string Post([FromBody] Customer customer)
         {
             try
             {
-                if(customer != null)
+                if (customer != null)
                 {
                     db.Customer.Add(customer);
                     db.SaveChanges();
                     return "Add";
-                } else { return "Not Add, Error"; }
-            }catch(EntityException e)
+                } else { return "Error"; }
+            }
+            catch (EntityException e)
             {
                 return e.Message.ToString();
             }
@@ -50,12 +51,12 @@ namespace WbHooksCroydon.Controllers
                 var id_customer = db.Customer.Find(id);
                 if (id_customer != null && customer != null)
                 {
-                    customer.id = id;
-                    db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+                    db.Entry(id_customer).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return "Update";
-                } else { return "Not Found"; }
-            }catch(EntityException e)
+                } else { return "Error"; }
+            }
+            catch (EntityException e)
             {
                 return e.Message.ToString();
             }
@@ -66,14 +67,15 @@ namespace WbHooksCroydon.Controllers
         {
             try
             {
-                var customer = db.Customer.Find(id);
-                if(customer != null)
+                var id_customer = db.Customer.Find(id);
+                if (id_customer != null)
                 {
-                    db.Customer.Remove(customer);
+                    db.Customer.Remove(id_customer);
                     db.SaveChanges();
                     return "Delete";
-                } else { return "Not Found"; }
-            }catch(EntityException e)
+                } else { return "Error"; }
+            }
+            catch (EntityException e)
             {
                 return e.Message.ToString();
             }

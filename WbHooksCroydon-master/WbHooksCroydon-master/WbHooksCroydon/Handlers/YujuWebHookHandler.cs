@@ -68,12 +68,14 @@ namespace WbHooksCroydon.Handlers
             double? total = 0;
             if (marketplace != null)
             {
+                // Add customer
                 try
                 {
-                    //db.Customer.Add(new Customer() {
-                    //    first_name = responseOrder.customer.first_name, last_name = responseOrder.customer.last_name,
-                    //    email = responseOrder.customer.email, phone = responseOrder.customer.phone,
-                    //    doc_number = responseOrder.customer.doc_number
+                    //db.Customer.Add(new Customer()
+                    //{
+                    //    first_name = responseOrder.customer.first_name,
+                    //    last_name = responseOrder.customer.last_name, email = responseOrder.customer.email,
+                    //    phone = responseOrder.customer.phone, doc_number = responseOrder.customer.doc_number
                     //});
                     //db.SaveChanges();
                 } catch (EntityException ex) { ex.Message.ToString(); }
@@ -82,13 +84,21 @@ namespace WbHooksCroydon.Handlers
                 {
                     foreach (var cart_order in responseOrder.cart_orders)
                     {
-                        var responseOrders = YujuClient.Instance.GetOrder(
-                           urlService + responseOrder.marketplace_pk.ToString() + 
-                           "/orders/" + cart_order.ToString() + "/"
-                        );
-                        total += responseOrders.total;
+                        var responseOrders = YujuClient.Instance.GetOrder
+                            (urlService + responseOrder.marketplace_pk.ToString() + 
+                           "/orders/" + cart_order.ToString() + "/");
+                        // total += responseOrders.total;
                     }
+                    total = responseOrder.extra.cart_total;
                 } else { total = responseOrder.total; }
+                /*
+                 * status de la orden. -> status
+                 * progress -> ["", "status": ].
+                 * payment_detail - extra -> status_detail && status
+                 * items -> status
+                 * items - shipments -> status_history {}
+                 * items - shipments -> status
+                 */
 
             }
 
