@@ -90,17 +90,14 @@ namespace WbHooksCroydon.Handlers
                         // total += responseOrders.total;
                     }
                     total = responseOrder.extra.cart_total;
+                    var status = responseOrder.status;
+                    var statusItems = responseOrder.items[0].status;
+                    var status_detail = responseOrder.payment_detail[0].extra.status_detail;
                 } else { total = responseOrder.total; }
-                /*
-                 * status de la orden. -> status
-                 * progress -> ["", "status": ].
-                 * payment_detail - extra -> status_detail && status
-                 * items -> status
-                 * items - shipments -> status_history {}
-                 * items - shipments -> status
-                 */
 
             }
+
+            // https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003835366140/
 
             Logs.Intance.log.Info(logReg);
             return Task.FromResult(true);

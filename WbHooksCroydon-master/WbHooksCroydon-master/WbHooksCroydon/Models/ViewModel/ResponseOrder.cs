@@ -25,7 +25,7 @@ namespace WbHooksCroydon.Models.ViewModel
         public class Amounts
         {
             public double? original { get; set; }
-            public int refunded { get; set; }
+            public int? refunded { get; set; }
         }
 
         public class BusinessInfo
@@ -70,16 +70,16 @@ namespace WbHooksCroydon.Models.ViewModel
             public DateTime? date_approved { get; set; }
             public bool? binary_mode { get; set; }
             public DateTime? date_last_updated { get; set; }
-            public int installments { get; set; }
+            public int? installments { get; set; }
             public string operation_type { get; set; }
-            public int collector_id { get; set; }
+            public int? collector_id { get; set; }
             public string payment_method_id { get; set; }
             public object pos_id { get; set; }
             public object money_release_schema { get; set; }
             public object differential_pricing_id { get; set; }
             public string build_version { get; set; }
             public object corporation_id { get; set; }
-            public int coupon_amount { get; set; }
+            public int? coupon_amount { get; set; }
             public List<Taxis> taxes { get; set; }
             public Payer payer { get; set; }
             public object authorization_code { get; set; }
@@ -98,21 +98,21 @@ namespace WbHooksCroydon.Models.ViewModel
             public object money_release_status { get; set; }
             public List<object> acquirer_reconciliation { get; set; }
             public object brand_id { get; set; }
-            public int taxes_amount { get; set; }
+            public int? taxes_amount { get; set; }
             public string external_reference { get; set; }
             public object merchant_account_id { get; set; }
             public object integrator_id { get; set; }
             public bool? captured { get; set; }
             public object counter_currency { get; set; }
-            public int shipping_amount { get; set; }
+            public int? shipping_amount { get; set; }
             public Order order { get; set; }
             public AdditionalInfo additional_info { get; set; }
             public string status { get; set; }
             public Metadata metadata { get; set; }
             public string currency_id { get; set; }
             public List<object> refunds { get; set; }
-            public int transaction_amount_refunded { get; set; }
-            public int transaction_amount { get; set; }
+            public int? transaction_amount_refunded { get; set; }
+            public int? transaction_amount { get; set; }
             public object date_of_expiration { get; set; }
             public string description { get; set; }
             public List<FeeDetail> fee_details { get; set; }
@@ -126,16 +126,16 @@ namespace WbHooksCroydon.Models.ViewModel
             public PointOfInteraction point_of_interaction { get; set; }
             public object call_for_authorize_id { get; set; }
             public object marketplace_owner { get; set; }
-            public int cart_seller_shipping_cost { get; set; }
+            public int? cart_seller_shipping_cost { get; set; }
             public double? cart_total { get; set; }
-            public int cart_marketplace_fee { get; set; }
+            public int? cart_marketplace_fee { get; set; }
             public string pack_id { get; set; }
-            public int cart_shipping_cost { get; set; }
+            public int? cart_shipping_cost { get; set; }
         }
 
         public class FeeDetail
         {
-            public int amount { get; set; }
+            public int? amount { get; set; }
             public string type { get; set; }
             public string fee_payer { get; set; }
         }
@@ -159,7 +159,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public object product_special_price { get; set; }
             public double? product_original_price { get; set; }
             public string carrier { get; set; }
-            public int quantity { get; set; }
+            public int? quantity { get; set; }
             public object comments { get; set; }
             public object delivery_time { get; set; }
             public string currency { get; set; }
@@ -190,7 +190,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public string mov_financial_entity { get; set; }
             public object tax_id { get; set; }
             public string mov_detail { get; set; }
-            public int user_id { get; set; }
+            public int? user_id { get; set; }
         }
 
         public class Order
@@ -248,7 +248,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public string size { get; set; }
             public object custom_variation { get; set; }
             public object custom_variation_name { get; set; }
-            public int stock { get; set; }
+            public int? stock { get; set; }
             public double? price { get; set; }
             public string color_text { get; set; }
             public object discount { get; set; }
@@ -300,8 +300,8 @@ namespace WbHooksCroydon.Models.ViewModel
         }
 
         public string pk { get; set; }
-        public int marketplace_pk { get; set; }
-        public int shop_pk { get; set; }
+        public int? marketplace_pk { get; set; }
+        public int? shop_pk { get; set; }
         public string reference { get; set; }
         public double? total { get; set; }
         public double? paid_total { get; set; }
@@ -342,7 +342,7 @@ namespace WbHooksCroydon.Models.ViewModel
             public string id { get; set; }
             public string tracking_code { get; set; }
             public string status { get; set; }
-            public int quantity { get; set; }
+            public int? quantity { get; set; }
             public object tracking_url { get; set; }
             public string label_url { get; set; }
         }
@@ -392,12 +392,12 @@ namespace WbHooksCroydon.Models.ViewModel
         {
             public object payable_deferral_period { get; set; }
             public object payment_method_reference_id { get; set; }
-            public int installment_amount { get; set; }
+            public int? installment_amount { get; set; }
             public double? net_received_amount { get; set; }
-            public int total_paid_amount { get; set; }
+            public int? total_paid_amount { get; set; }
             public object external_resource_url { get; set; }
             public object acquirer_reference { get; set; }
-            public int overpaid_amount { get; set; }
+            public int? overpaid_amount { get; set; }
             public object financial_institution { get; set; }
         }
 
