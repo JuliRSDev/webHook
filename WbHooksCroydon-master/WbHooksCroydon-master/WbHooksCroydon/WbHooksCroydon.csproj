@@ -477,6 +477,10 @@
     <Compile Include="Migrations\202207111502299_optinalVar.Designer.cs">
       <DependentUpon>202207111502299_optinalVar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207171931039_changeVariableType.cs" />
+    <Compile Include="Migrations\202207171931039_changeVariableType.Designer.cs">
+      <DependentUpon>202207171931039_changeVariableType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataBase\MarketPlaceHooksContext.cs" />
     <Compile Include="Models\DataBase\orders_hooks.cs" />
@@ -587,6 +591,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207111502299_optinalVar.resx">
       <DependentUpon>202207111502299_optinalVar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207171931039_changeVariableType.resx">
+      <DependentUpon>202207171931039_changeVariableType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

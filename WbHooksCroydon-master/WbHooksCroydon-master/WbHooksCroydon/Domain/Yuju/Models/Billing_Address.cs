@@ -12,6 +12,7 @@ namespace WbHooksCroydon.Domain.Yuju.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
+        public string pk { get; set; }
         public string address { get; set; }
         public string city { get; set; }
         public string country { get; set; }

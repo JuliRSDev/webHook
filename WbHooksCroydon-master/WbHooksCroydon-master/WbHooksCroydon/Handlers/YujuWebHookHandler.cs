@@ -55,49 +55,45 @@ namespace WbHooksCroydon.Handlers
             var order = YujuClient.Instance.GetOrderDetail(context.Data.ToString());
             var responseOrder = YujuClient.Instance.GetOrder(context.Data.ToString());
 
-            string marketplace = "";
+            string marketplace = "m_libre";
             if (responseOrder.marketplace_pk == 15)
             {
-                marketplace = "Libre";
                 foreach (var tag in responseOrder.tags)
                 {
-                    if (tag == "mshops") { marketplace = "Shops"; }
+                    if (tag == "mshops") { marketplace = "m_shops"; }
                 }
-            } else { marketplace = "Linio"; }
+            } else { marketplace = "m_linio"; }
 
             double? total = 0;
-            if (marketplace != null)
+
+            try
             {
-                // Add customer
-                try
+                db.Customer.Add(new Customer()
                 {
-                    //db.Customer.Add(new Customer()
-                    //{
-                    //    first_name = responseOrder.customer.first_name,
-                    //    last_name = responseOrder.customer.last_name, email = responseOrder.customer.email,
-                    //    phone = responseOrder.customer.phone, doc_number = responseOrder.customer.doc_number
-                    //});
-                    //db.SaveChanges();
-                } catch (EntityException ex) { ex.Message.ToString(); }
+                    first_name = responseOrder.customer.first_name,
+                    last_name = responseOrder.customer.last_name,
+                    email = responseOrder.customer.email,
+                    phone = responseOrder.customer.phone,
+                    nickname = responseOrder.customer.nickname,
+                    customer_id = responseOrder.customer.customer_id,
+                    doc_number = responseOrder.customer.doc_number,
+                    doc_type = responseOrder.customer.doc_type
+                });
+                db.SaveChanges();
 
-                if (responseOrder.cart_orders.Count > 0)
+            } catch (EntityException ex) { ex.Message.ToString(); }
+
+            if (responseOrder.cart_orders.Count > 0)
+            {
+                foreach (var cart_order in responseOrder.cart_orders)
                 {
-                    foreach (var cart_order in responseOrder.cart_orders)
-                    {
-                        var responseOrders = YujuClient.Instance.GetOrder
-                            (urlService + responseOrder.marketplace_pk.ToString() + 
-                           "/orders/" + cart_order.ToString() + "/");
-                        // total += responseOrders.total;
-                    }
-                    total = responseOrder.extra.cart_total;
-                    var status = responseOrder.status;
-                    var statusItems = responseOrder.items[0].status;
-                    var status_detail = responseOrder.payment_detail[0].extra.status_detail;
-                } else { total = responseOrder.total; }
+                    var responseOrders = YujuClient.Instance.GetOrder
+                        (urlService + responseOrder.marketplace_pk.ToString() +
+                       "/orders/" + cart_order.ToString() + "/");
+                }
+                total = responseOrder.extra.cart_total;
 
-            }
-
-            // https://api.software.madkting.com/shops/1086553/marketplace/15/orders/2000003835366140/
+            } else { total = responseOrder.total; }
 
             Logs.Intance.log.Info(logReg);
             return Task.FromResult(true);
